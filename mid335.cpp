@@ -91,7 +91,8 @@ int main(int argc, char *argv[])
             for (int j = 0; j< NUM_NOTES; j++){
                 outputNote = j + 1;
                 frequency = freq((note_t) outputNote,i);
-                cout << " " << setw(4) << to_string(outputNote) << "    " << i << "    "<< setw(10) << frequency;
+                cout << " " << setw(4) << to_string(outputNote) << "    " << i;
+                cout << "    "<< setw(10) << frequency;
                 inputFile >> inputData;
                 diff = fabs(atof(inputData) - frequency);
                 cout << "  " << to_string(diff);
