@@ -59,8 +59,6 @@ int main(int argc, char *argv[])
     float diff = 0;
     int badElement = 0;
 
-    int notesArray[NUM_OCTAVES][NUM_NOTES];    
-
 	if (argc < 3 || argc > 4) {
 		cout << "Usage: " << argv[0] << " <NOTE>  <OCTAVE_DELTA>" << endl;
         cout << "Usage for Unit test: " << argv[0] << " Z 0 <TOLERANCE>" << endl;
@@ -84,16 +82,16 @@ int main(int argc, char *argv[])
 
     
 	octave_delta = atoi(argv[2]);
-    if (note == (note_t)26 && octave_delta == 0){
+    if (note == (note_t)26 && octave_delta == 0 && argc == 4){
         cout << "tolerance: " << tolerance << endl;
         cout << "freq function unit-test" << endl << endl;
-        cout << "note octave value   diff     " << endl;
-        cout << "---- ------ ------- ----------" << endl;
+        cout << " note   octave    value    diff     " << endl;
+        cout << "----- ---------- ------- ----------" << endl;
         for (int i = 0; i < NUM_OCTAVES; i++){
             for (int j = 0; j< NUM_NOTES; j++){
                 outputNote = j + 1;
                 frequency = freq((note_t) outputNote,i);
-                cout << " " << setw(4) << to_string(outputNote) << "    " << i << "    "<< frequency;
+                cout << " " << setw(4) << to_string(outputNote) << "    " << i << "    "<< setw(10) << frequency;
                 inputFile >> inputData;
                 diff = fabs(atof(inputData) - frequency);
                 cout << "  " << to_string(diff);
@@ -104,7 +102,6 @@ int main(int argc, char *argv[])
                     cout <<  "<---- bad" << endl;
                     badElement++;
                 }
-
             }
         }
         cout << "bad element count: " << badElement << endl;
