@@ -1,7 +1,12 @@
-//CMPS 335
-//mid335.cpp
+// CMPS 335
+// mid335.cpp
+// Author: Mark Stevens
 //
+// Purpose: This program calculates frequency based on the note
+//          octave. It also has a unit test built into it to 
+//          test all 9 notes and 12 octaves.
 //
+//  Bones Question: With a tolerance of 0.005 there are 3 bad values
 //
 #include <iostream>
 #include <iomanip>
@@ -10,7 +15,6 @@
 #include <cmath>
 
 #include <string>
-#include <sstream>
 #include <fstream>
 using namespace std;
 
@@ -57,8 +61,9 @@ int main(int argc, char *argv[])
 
     int notesArray[NUM_OCTAVES][NUM_NOTES];    
 
-	if (argc < 3) {
+	if (argc < 3 || argc > 4) {
 		cout << "Usage: " << argv[0] << " <NOTE>  <OCTAVE_DELTA>" << endl;
+        cout << "Usage for Unit test: " << argv[0] << " Z 0 <TOLERANCE>" << endl;
 		return 0;
 	}
     if (argc == 4){
@@ -77,18 +82,9 @@ int main(int argc, char *argv[])
 	}
 	//You may call your unit test here...
 
-    if (note != (note_t)26){
-
-
-	    if (note > END) {
-		    cout << "Invalid note!" << endl;
-		    return 1;
-	    }
-	    octave_delta = atoi(argv[2]);
-	    cout << HALF_STEPS_PER_OCTAVE << endl;
-	    cout << freq(note, octave_delta) << endl;
-    }
-    else{
+    
+	octave_delta = atoi(argv[2]);
+    if (note == (note_t)26 && octave_delta == 0){
         cout << "tolerance: " << tolerance << endl;
         cout << "freq function unit-test" << endl << endl;
         cout << "note octave value   diff     " << endl;
@@ -113,6 +109,14 @@ int main(int argc, char *argv[])
         }
         cout << "bad element count: " << badElement << endl;
         cout << "unit test complete." << endl;
+    }
+    else{
+	    if (note > END) {
+		    cout << "Invalid note!" << endl;
+		    return 1;
+	    }
+	    cout << HALF_STEPS_PER_OCTAVE << endl;
+	    cout << freq(note, octave_delta) << endl;
     }
     inputFile.close();
 	return 0;
